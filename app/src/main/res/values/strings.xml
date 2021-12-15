@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Go In</string>
+
+
+    <string name="car_99">TODO</string>
+
+    <string name="police00">TODO</string>
+    <string name="fireb">TODO</string>
+    <string name="bike">bike</string>
+    <string name="Reservation">Reservation</string>
+    <string name="Public">Public Review</string>
+    <string name="sign_in_with_google">Sign in with google</string>
+    <string name="todo">TODO</string>
+    <string name="sign_in_with_google1">Sign In</string>
+    <string name="sorry_we_couldn_t_authenticate">Sorry we couldn\'t authenticate...</string>
+
+
+</resources>

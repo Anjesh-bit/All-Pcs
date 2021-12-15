@@ -1,0 +1,64 @@
+plugins {
+    id 'com.android.application'
+    id 'com.google.gms.google-services'
+}
+
+android {
+    compileSdk 31
+
+    defaultConfig {
+        applicationId "com.example.goin"
+        minSdk 24
+        targetSdk 31
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildFeatures {
+        viewBinding true
+    }
+    buildTypes {
+        release {
+            buildConfigField("String", "is_production", "\"" + getEnvField('release','IS_PRODUCTION') + "\"")
+            buildConfigField("String", "api_baseurl", "\"" + getEnvField('release','API_BASEURL') + "\"")
+            buildConfigField("String", "version", "\"" + getEnvField('release','VERSION') + "\"")
+            buildConfigField("String", "show_logs", "\"" + getEnvField('release','SHOW_LOGS') + "\"")
+            buildConfigField("String", "web_client_id", "\"" + getEnvField('release','WEB_CLIENT_ID') + "\"")
+        }
+
+        debug {
+            buildConfigField("String", "is_production", "\"" + getEnvField('debug','IS_PRODUCTION') + "\"")
+            buildConfigField("String", "api_baseurl", "\"" + getEnvField('debug','API_BASEURL') + "\"")
+            buildConfigField("String", "version", "\"" + getEnvField('debug','VERSION') + "\"")
+            buildConfigField("String", "show_logs", "\"" + getEnvField('debug','SHOW_LOGS') + "\"")
+            buildConfigField("String", "web_client_id", "\"" + getEnvField('debug','WEB_CLIENT_ID') + "\"")
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+def getEnvField(buidType,envKey){
+    def envFileName = "env.${buidType}.properties"
+    def envFile = file(envFileName)
+    def envProperties = new Properties()
+    envProperties.load(new FileInputStream(envFile))
+    def theKey = envProperties[envKey]
+    return theKey
+}
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.4.0'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
+    implementation 'com.google.firebase:firebase-auth:21.0.1'
+    implementation 'com.google.android.gms:play-services-auth:20.0.0'
+    testImplementation 'junit:junit:'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    // Fused Location Provider for Android (includes activity recognition and geofencing)
+    implementation 'com.google.android.gms:play-services-location:19.0.0'
+}
